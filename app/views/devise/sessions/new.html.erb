@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lexicon</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="transparent home welcompage">
+    <div class="bodyBg"></div>
+    <div class="overlayBlue"></div>
+    <div class="pageWrap">
+        <!-- Header -->
+        <div class="header rPos">
+            <div class="grid rPos">
+                <div class="row">
+                    <div class="c2">
+                        <div class="logo">
+                            <%= image_tag "logo.png", alt: 'Lexicon' %>
+                        </div>
+                    </div>
+
+                    <div class="c10">
+                        <h1 class="primaryColor headerTitle">Lexicon Resource and Materials Center</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main rPos primaryColor">
+            <div class="grid">
+                <div class="row">
+                    <div class="c16 s3">
+
+                      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <div class="field">
+                          <%= f.label :email %><br />
+                          <%= f.email_field :email, autofocus: true %>
+                        </div>
+
+                        <div class="field">
+                          <%= f.label :password %><br />
+                          <%= f.password_field :password, autocomplete: "off" %>
+                        </div>
+
+                        <% if devise_mapping.rememberable? -%>
+                          <div class="field">
+                            <%= f.check_box :remember_me %>
+                            <%= f.label :remember_me %>
+                          </div>
+                        <% end -%>
+
+                        <div class="actions">
+                          <%= f.submit "Log in" %>
+                        </div>
+                      <% end %>
+
+                      <%# render "devise/shared/links" %>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer rPos">
+        <div class="grid">
+            <div class="row">
+                <div class="c2">
+                    <div class="footerLogo">
+                        <%= image_tag "logo.png", alt: 'Lexicon' %>
+                    </div>
+                </div>
+                <div class="c10">
+                    <p>Corporate Headquarters: 8800 Technology Forest Place • The Woodlands, Texas 77381-1160</p>
+                    <p>Phone: 281.863.3000 | Toll Free: 855.828.4651 | Fax: 281.863.8088</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <%= javascript_include_tag "application" %>
+</body>
+
+</html>
