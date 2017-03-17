@@ -1,4 +1,10 @@
-ActiveAdmin.register UserLevel do
+ActiveAdmin.register Order do
+  
+  belongs_to :user_level, optional: true
+  
+  filter :id
+  
+  actions :all, :except => [:destroy]
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -11,16 +17,5 @@ ActiveAdmin.register UserLevel do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-index do
-  selectable_column
-  column :level
-  column :min_quantity
-  actions
-  column "Orders" do |ul|
-    link_to("view", admin_user_level_orders_path(ul))
-  end  
-end
-
-permit_params :level, :min_quantity
 
 end

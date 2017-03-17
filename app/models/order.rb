@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 
   has_many :order_items
   belongs_to :user
+  belongs_to :user_level
   
   validates :user, presence: true
   accepts_nested_attributes_for :order_items
