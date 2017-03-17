@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'support@lexicon.com'
+  default from: 'piyushshivam@gmail.com'
 end
