@@ -8,7 +8,6 @@
     <title>Lexicon</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body class="transparent home welcompage">
@@ -87,7 +86,7 @@
     </div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </body>
 
 </html>
