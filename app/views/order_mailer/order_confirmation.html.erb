@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Dear Customer,</h1>
+    <p>
+      You have successfully placed an order with Lexicon.
+      <br>
+      To track your Order please quote the following Order ID:<%= @order.id -%> in future communication.
+      <br/>
+      Below is your order summary:
+      <% @order.order_items.each do |li| %>
+        <%= "#{li.product.name} - #{li.unit_price.to_f}, Quantity: #{li.quantity} - Total: #{li.total_price.to_f}"%>
+        <br/>
+      <% end -%>
+      <br/>
+      Grand Total: <%= @order.total.to_f -%>
+      <br/><br/>
+    </p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>

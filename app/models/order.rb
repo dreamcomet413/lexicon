@@ -4,9 +4,10 @@ class Order < ApplicationRecord
   belongs_to :user
   
   validates :user, presence: true
-  before_save :update_total
-  
   accepts_nested_attributes_for :order_items
+  
+  before_save :update_total
+  after_create :notify_through_email
   
   private
   
@@ -16,6 +17,10 @@ class Order < ApplicationRecord
 
   def update_total
     self.total = calculate_total
+  end
+  
+  def notify_through_email
+    OrderMailer.order_confirmation(self).deliver_now
   end
   
 end

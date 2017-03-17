@@ -8,8 +8,11 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build order_params
-    @order.save
-    render :new
+    if @order.save
+      redirect_to "/pages/order_success"
+    else
+      render :new
+    end
   end
   
   private
