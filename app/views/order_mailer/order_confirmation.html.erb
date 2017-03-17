@@ -4,15 +4,15 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Dear Customer,</h1>
+    <h4>Dear User,</h4>
     <p>
       You have successfully placed an order with Lexicon.
-      <br>
-      To track your Order please quote the following Order ID:<%= @order.id -%> in future communication.
-      <br/>
-      Below is your order summary:
+      <br/><br/>
+      To track your Order please quote the following Order ID:<%= @order.id -%> for future communication.
+      <br/><br/>
+      Below is your order summary:<br/>
       <% @order.order_items.each do |li| %>
-        <%= "#{li.product.name} - #{li.unit_price.to_f}, Quantity: #{li.quantity} - Total: #{li.total_price.to_f}"%>
+        <%= "#{li.product.name} - #{li.unit_price}, Quantity: #{li.quantity} - Total: #{li.total_price}"%>
         <br/>
       <% end -%>
       <br/>

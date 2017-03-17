@@ -11,11 +11,7 @@ class OrderItem < ApplicationRecord
   attr_accessor :min_qty_level
 
   def unit_price
-    if persisted?
-      self.unit_price
-    else
-      product.price
-    end
+    product.price
   end
 
   def total_price
