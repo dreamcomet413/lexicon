@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items
   
   before_save :update_total
-  after_create :notify_through_email
+  # after_create :notify_through_email
   
   private
   

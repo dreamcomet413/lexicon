@@ -15,6 +15,7 @@ class User < ApplicationRecord
   before_create :assign_default_level
   
   delegate :level, to: :user_level
+  delegate :min_quantity, to: :user_level
   
   private
   
