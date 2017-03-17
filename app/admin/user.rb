@@ -12,6 +12,18 @@ ActiveAdmin.register User do
 #   permitted
 # end
 
+filter :email
+
+index do
+  selectable_column
+  id_column
+  column :email
+  column :created_at
+  column :updated_at
+  column :last_sign_in_at
+  column :sign_in_count
+end
+
 permit_params :email, :password, :password_confirmation
 
 form do |f|
