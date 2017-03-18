@@ -56,6 +56,18 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "lexicon_#{Rails.env}"
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'lexiconresourcesonline.com', port: 'http' }
+  config.action_mailer.smtp_settings = {
+      :address   => "smtp.mailgun.org",
+      :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
+      :enable_starttls_auto => true, # detects and uses STARTTLS
+      :user_name => Rails.application.secrets[:mailer][:username],
+      :password  => Rails.application.secrets[:mailer][:password], # SMTP password is any valid API key
+      :authentication => :plain, # Mandrill supports 'plain' or 'login'
+      :domain => Rails.application.secrets[:mailer][:domain] # your domain to identify your server when connecting
+    }
+  ActionMailer::Base.delivery_method = :smtp
+  
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -84,3 +96,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+Rails.application.routes.default_url_options[:host] = 'lexiconresourcesonline.com'

@@ -13,8 +13,8 @@ default: &default
 development:
   <<: *default
   database: lexicon_development
-  username: root
-  password: root
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,3 +28,5 @@ development:
 production:
   <<: *default
   database: lexicon_production
+  username: <%= Rails.application.secrets[:database][:username] %>
+  password: <%= Rails.application.secrets[:database][:password] %>
