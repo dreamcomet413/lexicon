@@ -718,7 +718,7 @@ a{
 
 /* Global CSS */
 .bodyBg{
-	background: url('background.jpg') no-repeat center center;
+	background: image-url('background.jpg') no-repeat center center;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
@@ -777,7 +777,7 @@ input{
 	padding: 20px 0;
 }
 .headerBg{
-	background: url('headerBg.jpg') no-repeat center center;
+	background: image-url('headerBg.jpg') no-repeat center center;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
