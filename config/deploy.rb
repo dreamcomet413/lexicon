@@ -25,11 +25,11 @@ namespace :deploy do
     end
   end
   
-  desc <<-DESC
-    [internal] Updates the symlink for secrets.yml file to the just deployed release.
-  DESC
-  task :symlink, :except => { :no_release => true } do
-    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
+  desc '[internal] Updates the symlink for secrets.yml file to the just deployed release.'
+  task :symlink do
+    on roles :all do
+      execute "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
+    end
   end
   
   # desc "Update crontab with whenever"
@@ -40,7 +40,7 @@ namespace :deploy do
   #     end
   #   end
   # end
-  
+  before 'deploy:updated', "symlink"
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
