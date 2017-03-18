@@ -38,6 +38,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'activeadmin', github: 'activeadmin'
 gem "paperclip", "~> 5.0.0"
+gem 'capistrano-rbenv', github: "capistrano/rbenv"
+gem 'capistrano-passenger'
+gem 'capistrano-bundler' # for capistrano/bundler
+gem 'capistrano-rails' # for capistrano/rails/*
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
