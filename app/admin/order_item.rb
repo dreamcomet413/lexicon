@@ -1,6 +1,6 @@
-ActiveAdmin.register Order do
+ActiveAdmin.register OrderItem do
   
-  belongs_to :user_level, optional: true
+  belongs_to :order
   
   filter :id
   
@@ -9,13 +9,13 @@ ActiveAdmin.register Order do
   index do
     selectable_column
     id_column
-    column :user
-    column "Products count" do |order|
-      link_to("#{order.order_items.sum(&:quantity)}", admin_order_order_items_path(order))
-    end
+    column :name
+    column :quantity
     column :created_at
+    column :updated_at
     actions
   end
+  
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

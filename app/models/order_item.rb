@@ -5,6 +5,8 @@ class OrderItem < ApplicationRecord
   # validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 1 }
   validate :product_present
   validate :check_min_quantity_critera, on: :create
+  
+  delegate :name, to: :product
 
   before_save :finalize
   

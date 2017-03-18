@@ -11,6 +11,9 @@ ActiveAdmin.register UserLevel do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+
+actions :all, :except => [:destroy]
+
 index do
   selectable_column
   column :level

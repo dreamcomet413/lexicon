@@ -21,9 +21,9 @@ ActiveAdmin.register_page "Dashboard" do
       
       column do
         panel "Recent Orders" do
-          table_for Order.order("id DESC").first(5) do
-            column("Order#ID")   {|order| link_to("ID#{order.id}", admin_order_path(order)) }
-            column("Order Total"){|order| number_to_currency(order.total) }
+          table_for Order.includes(:order_items).order("id DESC").first(5) do
+            column("Order#ID")   {|order| link_to("Order##{order.id}", admin_order_path(order)) }
+            column("Products count"){|order|  link_to("#{order.order_items.sum(&:quantity)}", admin_order_order_items_path(order))}
           end          
         end
       end
