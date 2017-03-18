@@ -14,7 +14,6 @@ set :deploy_to, '/home/deploy/lexicon'
 # set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :bundle_binstubs, nil
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # set :whenever_environment,  ->{ fetch :rails_env, "production" }
 
 namespace :deploy do
@@ -24,6 +23,13 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
     end
+  end
+  
+  desc <<-DESC
+    [internal] Updates the symlink for secrets.yml file to the just deployed release.
+  DESC
+  task :symlink, :except => { :no_release => true } do
+    run "ln -nfs #{shared_path}/config/secrets.yml #{release_path}/config/secrets.yml"
   end
   
   # desc "Update crontab with whenever"
@@ -37,7 +43,6 @@ namespace :deploy do
   
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'deploy:update_cron'
 end
 
 
