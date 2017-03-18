@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  http_basic_authenticate_with name: "safe", password: "qwerty!@"
+  
   before_action :authenticate_user!
   before_action :set_min_qty_level
   
