@@ -38,6 +38,11 @@
                     <div class="c16 s3">
 
                       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <div style="color:#e91e63;font-size:17px;padding-left:5px;background:#fff;line-height:30px;width:600px;">
+                          <% if request.post? -%>
+                            <%= image_tag "/error-icon.png", size: "18x18", style: "display:inline;"%>&nbsp; Your username or password is incorrect. 
+                          <% end -%>
+                        </div>
                         <div class="field">
                           <%= f.label :email %><br />
                           <%= f.email_field :email, autofocus: true %>
