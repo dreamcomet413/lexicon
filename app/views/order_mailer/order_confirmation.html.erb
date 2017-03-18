@@ -12,11 +12,11 @@
       <br/><br/>
       Below is your order summary:<br/>
       <% @order.order_items.each do |li| %>
-        <%= "#{li.product.name} - #{li.unit_price}, Quantity: #{li.quantity} - Total: #{li.total_price}"%>
+        <%= "#{li.product.name} - #{li.unit_price}, Quantity: #{li.quantity}"%>
         <br/>
       <% end -%>
       <br/>
-      Grand Total: <%= @order.total.to_f -%>
+      Total Products Ordered: <%= @order.order_items.sum(&:quantity) -%>
       <br/><br/>
     </p>
     <p>Thanks and have a great day!</p>
