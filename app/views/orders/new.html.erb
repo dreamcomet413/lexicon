@@ -8,7 +8,7 @@
     <title>Order - Lexicon</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css" crossorigin="anonymous" />
 </head>
 
 <body class="vilotBgColor success orderFinal">
@@ -110,6 +110,17 @@
     </div>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".fancybox").fancybox({
+                width: 600,
+                height: 300,
+                position:'relative',
+                hideOnContentClick: true
+            })
+        });
+    </script>
 </body>
 
 </html>
