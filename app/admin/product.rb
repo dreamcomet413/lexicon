@@ -10,7 +10,6 @@ ActiveAdmin.register Product do
   controller do
     def new 
       super do |format|
-        logger.info resource.quantity_levels.inspect
         UserLevel.all.each do |ul|
           resource.quantity_levels.build(user_level_id: ul.id)
         end

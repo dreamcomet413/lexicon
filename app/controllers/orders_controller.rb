@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
   
   def new
     @order = current_user.orders.build
-    logger.info Product.all.inspect
     Product.all.includes(:quantity_levels).each do |pr| 
       qty_level = pr.quantity_levels.find {|l| l.user_level_id == current_user.user_level_id}
       @order.order_items.build(product: pr, quantity: qty_level.min_quantity, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
@@ -39,4 +38,5 @@ class OrdersController < ApplicationController
       end
     end
   end
+  
 end
