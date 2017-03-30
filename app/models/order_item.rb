@@ -2,17 +2,20 @@ class OrderItem < ApplicationRecord
   belongs_to :product
   belongs_to :order
   
-  enum status: {permissible: 0, high: 1}, _prefix: "quantity"
+  enum status: {permissible_quantity: 0, high_quantity: 1}
 
   # validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 1 }
   validate :product_present
   validate :check_min_quantity_critera, on: :create
   
   delegate :name, to: :product
+  
+  before_create :set_status
 
   before_save :finalize
   
   attr_accessor :min_qty_level
+  attr_accessor :max_qty_level
 
   def unit_price
     product.price
@@ -25,12 +28,17 @@ class OrderItem < ApplicationRecord
 
   private
   
-  def check_min_quantity_critera
-    if quantity < min_qty_level
-      self.errors.add(:quantity, "should be minimum #{min_qty_level}.")
+  def set_status
+    if quantity > max_qty_level
       self.status = "high_quantity"
     else
       self.status = "permissible_quantity"
+    end
+  end
+  
+  def check_min_quantity_critera
+    if quantity < min_qty_level
+      self.errors.add(:quantity, "should be minimum #{min_qty_level}.")
     end
   end
   

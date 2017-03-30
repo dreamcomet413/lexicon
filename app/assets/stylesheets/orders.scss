@@ -1,3 +1,12 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.lock-icon { display: inline-block; background: image-url('lock.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+ 
+.lock { background-position: -2px -0px; width: 50px; height: 50px; float: right; margin-top: -5px;}
+.unlock { background-position: -2px -52px; width: 50px; height: 50px; }
+
+.mark-input-red {
+  border: 2px dashed red !important;
+}

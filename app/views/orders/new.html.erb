@@ -55,9 +55,6 @@
                         <div class="c6">
                         </div>
 
-                        <div class="c1">
-                            <p>Min. Quantity</p>
-                        </div>
 
                         <div class="c2">
                             <p>Quantity</p>
@@ -108,6 +105,14 @@
             </div>
         </div>
     </div>
+    
+    <div class="tooltip_templates hide">
+        <span id="tooltip_content_info">
+            <strong style="text-decoration:underline;">Order Needs Approval</strong>
+            <div>Since you are exceeding the maximum quantity level allowed for this product so order would be in pending state until approved by our staff. You will receive a email about your order's status.</div>
+        </span>
+    </div>
+    
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js" crossorigin="anonymous"></script>
