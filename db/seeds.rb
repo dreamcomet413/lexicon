@@ -6,3 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.create!(email: 'piyushshivam@gmail.com', password: 'password', password_confirmation: 'password')
+
+UserLevel.create!(level: "TBM")
+UserLevel.create!(level: "CNL")
+UserLevel.create!(level: "DSA")
+UserLevel.create!(level: "TELE")
+UserLevel.create!(level: "MSL")
+UserLevel.create!(level: "HOME OFFICE")

@@ -17,13 +17,12 @@ actions :all, :except => [:destroy]
 index do
   selectable_column
   column :level
-  column :min_quantity
   actions
   column "Orders" do |ul|
     link_to("view", admin_user_level_orders_path(ul))
   end  
 end
 
-permit_params :level, :min_quantity
+permit_params :level
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317191651) do
+ActiveRecord::Schema.define(version: 20170330195534) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -46,20 +46,22 @@ ActiveRecord::Schema.define(version: 20170317191651) do
   create_table "order_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "product_id"
     t.integer  "order_id"
-    t.decimal  "unit_price",  precision: 12, scale: 3
+    t.decimal  "unit_price",            precision: 12, scale: 3
     t.integer  "quantity"
-    t.decimal  "total_price", precision: 12, scale: 3
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.decimal  "total_price",           precision: 12, scale: 3
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.integer  "status",      limit: 1,                          default: 0
     t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
     t.index ["product_id"], name: "index_order_items_on_product_id", using: :btree
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.decimal  "total",      precision: 12, scale: 3
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.decimal  "total",                precision: 12, scale: 3
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.integer  "status",     limit: 1,                          default: 0
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -75,11 +77,21 @@ ActiveRecord::Schema.define(version: 20170317191651) do
     t.datetime "image_updated_at"
   end
 
+  create_table "quantity_levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "product_id"
+    t.integer  "user_level_id"
+    t.integer  "min_quantity",  default: 0
+    t.integer  "max_quantity",  default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["product_id"], name: "index_quantity_levels_on_product_id", using: :btree
+    t.index ["user_level_id"], name: "index_quantity_levels_on_user_level_id", using: :btree
+  end
+
   create_table "user_levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "level"
-    t.integer  "min_quantity", default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "level",      limit: 30
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -104,5 +116,7 @@ ActiveRecord::Schema.define(version: 20170317191651) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "quantity_levels", "products"
+  add_foreign_key "quantity_levels", "user_levels"
   add_foreign_key "users", "user_levels"
 end
