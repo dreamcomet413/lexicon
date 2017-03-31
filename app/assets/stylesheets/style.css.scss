@@ -888,7 +888,15 @@ input{
 	margin: 20px 0px 50px 0;
 }
 
+.primaryButton {
+    background: #7AC144;
+    color: #fff !important;
+    text-decoration: none !important;
+    padding: 10px 25px;
+    text-transform: capitalize;
+    font-family: 'Cabin';
+}
 
-
-
-
+h1, h2 {
+  color: #fff;
+}
