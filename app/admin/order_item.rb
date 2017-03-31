@@ -10,7 +10,13 @@ ActiveAdmin.register OrderItem do
     selectable_column
     id_column
     column :name
-    column :quantity
+    column :quantity do |item|
+      if item.high_quantity?
+        "<span class='high_quantity'>#{item.quantity}</span>".html_safe
+      else
+        item.quantity
+      end
+    end
     column :created_at
     column :updated_at
     actions

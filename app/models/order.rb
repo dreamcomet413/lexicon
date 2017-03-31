@@ -9,7 +9,8 @@ class Order < ApplicationRecord
   validates :user, presence: true
   accepts_nested_attributes_for :order_items
   
-  before_create :update_total, :set_status
+  before_create :update_total
+  after_create :set_status
   after_create :notify_through_email
   
   private
@@ -23,7 +24,7 @@ class Order < ApplicationRecord
   end
   
   def set_status
-    self.status = order_items.any?(&:high_quantity?) ? "waiting_approval" : "success"
+    order_items.any?(&:high_quantity?) ? self.waiting_approval! : self.success!
   end
   
   def notify_through_email
