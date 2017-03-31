@@ -3,7 +3,7 @@ ActiveAdmin.register Product do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 
-  actions :all, :except => [:destroy]
+  actions :all
   
   permit_params :name, :price, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
   
