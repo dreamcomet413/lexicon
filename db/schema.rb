@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330195534) do
+ActiveRecord::Schema.define(version: 20170331003217) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -58,10 +58,11 @@ ActiveRecord::Schema.define(version: 20170330195534) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.decimal  "total",                precision: 12, scale: 3
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.integer  "status",     limit: 1,                          default: 0
+    t.decimal  "total",                              precision: 12, scale: 3
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
+    t.integer  "status",               limit: 1,                              default: 0
+    t.text     "reason_for_rejection", limit: 65535
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
