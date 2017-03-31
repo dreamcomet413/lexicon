@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331003217) do
+ActiveRecord::Schema.define(version: 20170331092704) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -96,19 +96,32 @@ ActiveRecord::Schema.define(version: 20170331003217) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                              default: "", null: false
+    t.string   "encrypted_password",                 default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "user_level_id"
+    t.string   "first_name",             limit: 100
+    t.string   "last_name",              limit: 100
+    t.string   "street_address"
+    t.string   "city",                   limit: 100
+    t.string   "state",                  limit: 10
+    t.string   "zip_code",               limit: 10
+    t.string   "telephone",              limit: 20
+    t.string   "sales_force",            limit: 10
+    t.string   "region",                 limit: 30
+    t.string   "region_id",              limit: 30
+    t.string   "territory_alignment",    limit: 100
+    t.string   "territory_id",           limit: 10
+    t.string   "employee_id",            limit: 10
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["user_level_id"], name: "index_users_on_user_level_id", using: :btree
