@@ -4,5 +4,5 @@ class UserLevel < ApplicationRecord
   has_many :orders, through: :users
   has_many :quantity_levels
   
-  validates :level, presence: true
+  validates :level, presence: true, uniqueness: true
 end
