@@ -12,7 +12,7 @@ class OrderItem < ApplicationRecord
   
   before_create :set_status
 
-  before_save :finalize
+  # before_save :finalize
   
   attr_accessor :min_qty_level
   attr_accessor :max_qty_level

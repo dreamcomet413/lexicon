@@ -7,11 +7,11 @@ class Order < ApplicationRecord
   enum status: {success: 0, waiting_approval: 1, rejected: 2}
   
   validates :user, presence: true
-  accepts_nested_attributes_for :order_items
+  accepts_nested_attributes_for :order_items, :reject_if => lambda{ |a| a[:quantity] == "0" }
   
   attr_accessor :reject_order
   
-  before_create :update_total
+  # before_create :update_total
   
   before_update :on_reject_change_status
   # before_save :validate_present_of_reason_on_rejection, only: :update

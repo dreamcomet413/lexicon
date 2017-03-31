@@ -5,7 +5,7 @@ ActiveAdmin.register Product do
 
   actions :all
   
-  permit_params :name, :price, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
+  permit_params :name, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
   
   controller do
     def new 
@@ -27,7 +27,6 @@ ActiveAdmin.register Product do
   form do |f|
     f.inputs "Product Details" do
       f.input :name
-      f.input :price
       f.input :description
       f.input :image, :as => :file
       f.inputs do
