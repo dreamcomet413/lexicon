@@ -4,4 +4,8 @@ class PagesController < ApplicationController
   def home
     
   end
+  
+  def order_success
+    @order = Order.where(id: params[:order_id]).first
+  end
 end

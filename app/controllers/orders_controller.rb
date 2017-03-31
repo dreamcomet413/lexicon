@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
     @order = current_user.orders.build order_params
     sanitize_order
     if @order.save
-      redirect_to "/pages/order_success"
+      redirect_to "/pages/order_success?order_id=#{@order.id}"
     else
       render :new
     end
