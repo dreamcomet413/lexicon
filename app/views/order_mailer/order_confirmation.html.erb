@@ -6,8 +6,10 @@
   <body>
     <h4>Dear User,</h4>
     <p>
-      You have successfully placed an order with Lexicon.
-      <br/><br/>
+      <% if @order.rejected? %>
+        <strong>Reason for rejection:</strong><br/>
+        <%= @order.reason_for_rejection -%><br/><br/>
+      <% end %>
       To track your Order please quote the following Order ID:<%= @order.id -%> for future communication.
       <br/><br/>
       Below is your order summary:<br/>

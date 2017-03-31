@@ -2,6 +2,9 @@ class OrderMailer < ApplicationMailer
   
   def order_confirmation(order)
     @order = order
-    mail(to: "piyushshivam@gmail.com", subject: 'Your Order has been placed successfully')
+    subject = "Order##{order.id} Status:#{order.status}"
+    recipients = "piyushshivam@gmail.com, #{order.user.email}"
+    
+    mail(to: recipients, subject: subject)
   end
 end

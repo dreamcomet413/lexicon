@@ -12,14 +12,15 @@ class Order < ApplicationRecord
   attr_accessor :reject_order
   
   before_create :update_total
-  after_create :set_status
-  after_create :notify_through_email
   
-  before_update :notify_on_order_rejection
-  before_save :validate_present_of_reason_on_rejection, only: :update
+  before_update :on_reject_change_status
+  # before_save :validate_present_of_reason_on_rejection, only: :update
+  
+  after_create :set_status_and_notify
+  after_update :notify_through_email
   
   private
-  
+    
   def validate_present_of_reason_on_rejection
     if reject_order.present?
       if reason_for_rejection.blank?
@@ -28,7 +29,7 @@ class Order < ApplicationRecord
     end
   end
   
-  def notify_on_order_rejection
+  def on_reject_change_status
     if reason_for_rejection.present? && reject_order.present?
       self.status = "rejected"
     end
@@ -42,8 +43,19 @@ class Order < ApplicationRecord
     self.total = calculate_total
   end
   
-  def set_status
-    order_items.any?(&:high_quantity?) ? self.waiting_approval! : self.success!
+  def set_status_and_notify
+    if order_items.any?(&:high_quantity?)
+      self.waiting_approval!
+      notify_through_email
+    else
+      notify_through_email
+    end
+  end
+  
+  def notify_through_email_on_approval
+    if previous_changes["status"].present? && (previous_changes["status"] == "waiting_approval")
+      notify_through_email
+    end
   end
   
   def notify_through_email

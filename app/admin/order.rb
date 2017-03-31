@@ -49,7 +49,7 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.inputs "Order Rejection Details" do
-      f.input :reason_for_rejection, as: :text, input_html: {required: true}
+      f.input :reason_for_rejection, as: :text, input_html: {required: true, value: "Sorry your order has been rejected for the following reason:"}
       f.input :reject_order, input_html: {value: '1', required: true}, as: :hidden
     end
     f.actions
