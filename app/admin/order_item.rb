@@ -6,9 +6,10 @@ ActiveAdmin.register OrderItem do
   
   actions :all, :except => [:destroy]
   
-  index do
-    selectable_column
-    id_column
+  index :title => proc{ 
+    o = Order.where(id: params[:order_id]).includes(:user).first
+    "OrderID##{o.id} placed by User: #{o.user.full_name}"
+  } do
     column :name
     column :quantity do |item|
       if item.high_quantity?
@@ -19,7 +20,6 @@ ActiveAdmin.register OrderItem do
     end
     column :created_at
     column :updated_at
-    actions
   end
   
 # See permitted parameters documentation:
