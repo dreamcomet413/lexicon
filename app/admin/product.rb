@@ -5,6 +5,8 @@ ActiveAdmin.register Product do
 
   actions :all
   
+  filter :name
+  
   permit_params :name, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
   
   controller do

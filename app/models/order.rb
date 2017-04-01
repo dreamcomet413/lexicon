@@ -4,6 +4,23 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :user_level
   
+  ransacker :by_product,
+    formatter: proc { |product_id|
+      results = Order.with_product(product_id).map(&:id)
+      results = results.present? ? results : nil
+    } do |parent|
+    parent.table[:id]
+  end
+  
+  def self.with_product(product_id)
+    joins(:order_items).where(order_items: {product_id: product_id} )
+  end
+  
+
+  def self.has_pc(pc_id)
+    self.joins(:products).where(products: {product_color_id: pc_id})
+  end
+  
   enum status: {success: 0, waiting_approval: 1, rejected: 2}
   
   validates :user, presence: true
