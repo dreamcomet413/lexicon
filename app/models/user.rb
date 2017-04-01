@@ -16,6 +16,14 @@ class User < ApplicationRecord
   
   delegate :level, to: :user_level
   delegate :min_quantity, to: :user_level
+
+  def full_name
+    if first_name.present? or last_name.present?
+      "#{first_name} #{last_name}"
+    else
+      email
+    end
+  end
   
   private
   

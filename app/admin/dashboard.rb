@@ -19,10 +19,20 @@ ActiveAdmin.register_page "Dashboard" do
       end
       
       column do
-        panel "Recent Orders" do
-          table_for Order.includes(:order_items).order("id DESC").first(5) do
+        panel "Orders: Waiting Approval" do
+          table_for Order.waiting_approval.includes(:order_items, :user).order("id DESC") do
             column("Order#ID")   {|order| link_to("Order##{order.id}", admin_order_path(order)) }
-            column("Products count"){|order|  link_to("#{order.order_items.sum(&:quantity)}", admin_order_order_items_path(order))}
+            column("Products"){|order|  link_to("view products", admin_order_order_items_path(order))}
+            column("User"){|order|  link_to(order.user.full_name, admin_user_path(order.user))}
+            column "Controls" do |o|
+              accept_link = link_to("Accept", change_status_admin_order_path(o), data: {confirm: "Are you sure?"})
+              reject_link = link_to("Reject", edit_admin_order_path(o))
+              if o.waiting_approval?
+                accept_link + " || " + reject_link
+              elsif o.rejected?
+                accept_link
+              end
+            end
           end          
         end
       end
