@@ -21,7 +21,7 @@ index do
   column :email
   column :level
   column "Orders Placed" do |u|
-    link_to(u.orders.count, admin_orders_path(user_id: u.id))
+    link_to(u.orders.count, admin_orders_path('q[user_id_eq]': u.id))
   end
   column :last_sign_in_at
   actions
