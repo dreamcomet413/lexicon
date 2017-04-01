@@ -16,6 +16,15 @@ ActiveAdmin.register Product do
       end
     end
   end
+  
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :created_at
+    column :updated_at
+  end
+  
 #
 # or
 #
