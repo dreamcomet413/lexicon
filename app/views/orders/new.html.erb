@@ -47,7 +47,7 @@
             <div class="grid">
                 <div class="row">
                     <div class="productHeader">
-                        <div class="c3">
+                        <div class="c2">
                             <h2>PRODUCT</h2>
                             <p class="removeTop">Click thumbnail to zoom</p>
                         </div>
@@ -55,18 +55,29 @@
                         <div class="c6">
                         </div>
 
+                        <div class="c1">
+                          <p>Min. Quantity</p>
+                        </div>
+                        
+                        <div class="c1">
+                          <p>Max. Quantity</p>
+                        </div>
 
                         <div class="c2">
-                            <p>Minimum Quantity</p>
+                          <p>Quantity</p>
                         </div>
                     </div>
                     <div class="clear"></div>
                     
-                    <%= form_for @order, id: 'order-form' do |f| %>
+                    <%= form_for @order do |f| %>
                       <div class="productList">
                           <div class="c12">
                               <div class="row">
-                                
+                                <% if @order.errors[:base].present? %>
+                                  <div class="error-container">
+                                    <span class="error-msg"><%= @order.errors[:base].first -%></span>
+                                  </div>
+                                <% end -%>
                                 <%= f.fields_for :order_items do |order_item| %>
                                     <%= render partial: "order_item", locals: {f: order_item} -%>
                                 <% end %> 
@@ -79,7 +90,7 @@
                       <div class="cartButton">
   	                    <div class="c12">
   	                      <%= f.submit "Add to Cart", id: "form-submit", style: "display:none;" %>
-  		                    <a class="primaryButton addCart right white-color-btn" href="#" onclick="document.getElementById('form-submit').click();return false;">Add to Cart</a>
+  		                    <a class="primaryButton addCart right white-color-btn cart-submit" href="#">Add to Cart</a>
   	                    </div>
                       </div>
                       
@@ -108,7 +119,7 @@
     
     <div class="tooltip_templates hide">
         <span id="tooltip_content_info" class="tooltip_content">
-            Maximum allowed value is . On exceeding the maximum quantity level your order will remain in pending state until approved by our staff. You will receive a email about your order's status.
+            Minimum allowed value is .
         </span>
     </div>
     

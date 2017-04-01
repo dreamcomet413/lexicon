@@ -15,3 +15,12 @@ a.white-color-btn {
   color: #fff !important;
   text-decoration: none;
 }
+
+.error-container {
+  margin:0 auto;
+  text-align: center;
+}
+
+.error-container .error-msg {
+  color: #8b0000;
+}

@@ -19,8 +19,17 @@ class Order < ApplicationRecord
   after_create :set_status_and_notify
   after_update :notify_through_email
   
+  validate :require_atleast_one_order_item
+  
   private
-    
+  def require_atleast_one_order_item
+    errors.add(:base, "You must order atleast one product") if all_order_items_have_quantity_zero?
+  end
+  
+  def all_order_items_have_quantity_zero?
+    !order_items.collect(&:quantity).any? {|i| i>0}
+  end
+      
   def validate_present_of_reason_on_rejection
     if reject_order.present?
       if reason_for_rejection.blank?
