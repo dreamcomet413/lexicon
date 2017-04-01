@@ -7,8 +7,8 @@ ActiveAdmin.register OrderItem do
   actions :all, :except => [:destroy]
   
   index :title => proc{ 
-    o = Order.where(id: params[:order_id]).includes(:user).first
-    "OrderID##{o.id} placed by User: #{o.user.full_name}"
+    o = Order.where(id: params[:order_id]).includes(:user, :user_level).first
+    "OrderID##{o.id} placed by User: #{o.user.full_name} Level: #{o.user_level.level}"
   } do
     column :name
     column :quantity do |item|
