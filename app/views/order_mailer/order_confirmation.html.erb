@@ -14,7 +14,8 @@
       <br/><br/>
       Below is your order summary:<br/>
       <% @order.order_items.each do |li| %>
-        <%= "#{li.product.name} Quantity: #{li.quantity}"%>
+        <% high_qty_css = li.high_quantity? ? "color:#8b0000;" : "" -%>
+        <span style="<%= high_qty_css -%>"><%= "#{li.product.name} - Quantity: #{li.quantity}"%></span>
         <br/>
       <% end -%>
       <br/>
