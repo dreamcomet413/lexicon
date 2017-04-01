@@ -13,11 +13,6 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build order_params
     
-    # handles the case where all items submitted with zero qty 
-    if @order.order_items.size.zero?
-      preload_order_items
-    end
-    
     if request.post?
       sanitize_order
     end
@@ -37,6 +32,7 @@ class OrdersController < ApplicationController
       @order.order_items.build(product: pr, quantity: 0, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
     end
   end
+  
   def order_params
     params.require(:order).permit(order_items_attributes: [:product_id, :quantity, :min_qty_level, :max_quantity_level])
   end

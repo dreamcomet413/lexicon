@@ -37,7 +37,7 @@ class OrderItem < ApplicationRecord
   end
   
   def check_min_quantity_critera
-    if quantity < min_qty_level
+    if (!quantity.zero? && (quantity < min_qty_level))
       self.errors.add(:quantity, "should be minimum #{min_qty_level}.")
     end
   end

@@ -15,7 +15,7 @@ $(document).ready(function(){
         el.tooltipster('open', function(instance, helper){
           instance.content("Minimum allowed value is "+ min +".");
         }); 
-        el.val(0);
+        // el.val(0);
       }
     }, 300));
 

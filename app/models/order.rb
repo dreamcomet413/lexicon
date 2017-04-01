@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   enum status: {success: 0, waiting_approval: 1, rejected: 2}
   
   validates :user, presence: true
-  accepts_nested_attributes_for :order_items, :reject_if => lambda{ |a| a[:quantity] == "0" }
+  accepts_nested_attributes_for :order_items #, :reject_if => lambda{ |a| a[:quantity] == "0" }
   
   attr_accessor :reject_order
   
@@ -27,7 +27,7 @@ class Order < ApplicationRecord
   end
   
   def all_order_items_have_quantity_zero?
-    !order_items.collect(&:quantity).any? {|i| i>0}
+    !order_items.collect(&:quantity).any? {|i| i > 0}
   end
       
   def validate_present_of_reason_on_rejection
