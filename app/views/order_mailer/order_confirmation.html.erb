@@ -14,7 +14,7 @@
       <br/><br/>
       Below is your order summary:<br/>
       <% @order.order_items.each do |li| %>
-        <%= "#{li.product.name} - #{li.unit_price}, Quantity: #{li.quantity}"%>
+        <%= "#{li.product.name} Quantity: #{li.quantity}"%>
         <br/>
       <% end -%>
       <br/>

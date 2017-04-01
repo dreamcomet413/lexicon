@@ -20,8 +20,8 @@ ActiveAdmin.register Order do
     selectable_column
     id_column
     column :user
-    column "Products count" do |order|
-      link_to("#{order.order_items.sum(&:quantity)}", admin_order_order_items_path(order))
+    column "Products" do |order|
+      link_to("view products", admin_order_order_items_path(order))
     end
     column :created_at
     actions
