@@ -48,6 +48,16 @@
                     <div class="c12">
                         <h1><%= order_status @order -%></h1>
                         <p>Thank you for your order. To return to the welcome page, please click <a href="/">here.</a>
+                        <% if @order.waiting_approval? -%>
+                          <p>
+                            Order Details:<br/>
+                            <% @order.order_items.each do |li| %>
+                              <% high_qty_css = li.high_quantity? ? "color:#f44336;" : "" -%>
+                              <span style="<%= high_qty_css -%>"><%= "#{li.product.name} - Quantity: #{li.quantity}"%></span>
+                              <br/>
+                            <% end -%>
+                          </p>
+                        <% end -%>  
                         </p>
                     </div>
                 </div>
