@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+
+User.all.includes(:orders).each do |u|
+  u.orders.each do |o|
+    o.update_column(:user_level_id, u.user_level_id)
+  end
+end

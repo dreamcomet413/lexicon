@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331092704) do
+ActiveRecord::Schema.define(version: 20170401174615) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -63,7 +63,9 @@ ActiveRecord::Schema.define(version: 20170331092704) do
     t.datetime "updated_at",                                                              null: false
     t.integer  "status",               limit: 1,                              default: 0
     t.text     "reason_for_rejection", limit: 65535
+    t.integer  "user_level_id"
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+    t.index ["user_level_id"], name: "index_orders_on_user_level_id", using: :btree
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 20170331092704) do
 
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "user_levels"
   add_foreign_key "orders", "users"
   add_foreign_key "quantity_levels", "products"
   add_foreign_key "quantity_levels", "user_levels"

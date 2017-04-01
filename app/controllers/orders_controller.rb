@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   
   def new
-    @order = current_user.orders.build
+    @order = current_user.orders.build(user_level: current_user.user_level)
     preload_order_items
   end
 
@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   end
   
   def order_params
-    params.require(:order).permit(order_items_attributes: [:product_id, :quantity, :min_qty_level, :max_quantity_level])
+    params.require(:order).permit(:user_level_id, order_items_attributes: [:product_id, :quantity, :min_qty_level, :max_quantity_level])
   end
   
   def sanitize_order

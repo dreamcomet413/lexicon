@@ -78,6 +78,7 @@
                                     <span class="error-msg"><%= @order.errors[:base].first -%></span>
                                   </div>
                                 <% end -%>
+                                <%= f.hidden_field :user_level_id %>
                                 <%= f.fields_for :order_items do |order_item| %>
                                     <%= render partial: "order_item", locals: {f: order_item} -%>
                                 <% end %> 
