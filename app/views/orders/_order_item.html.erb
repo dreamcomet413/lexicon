@@ -2,7 +2,7 @@
     <div class="c1">
         <div class="productImage">
           <a class="fancybox" href="<%= f.object.product.image.url -%>">
-            <%= image_tag f.object.product.image.url, alt: "product", style: "width:56px;height:75px;" %>
+            <%= image_tag f.object.product.image.url(:thumb), alt: "product", class: 'product-thumb' %>
             <div class="cContainer">
                 <%= image_tag "cameraphoto.png", alt: "Zoom Image" -%>
             </div>
