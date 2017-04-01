@@ -7,6 +7,8 @@ ActiveAdmin.register Order do
   scope :rejected
   
   filter :id
+  filter :user
+  filter :user_level
   
   actions :all, :except => [:destroy, :new]
   

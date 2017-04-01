@@ -16,4 +16,8 @@ class UserLevel < ApplicationRecord
     end
     product_count
   end
+  
+  def name
+    level
+  end
 end

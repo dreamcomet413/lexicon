@@ -20,10 +20,10 @@ index do
   id_column
   column :email
   column :level
-  column :created_at
-  column :updated_at
+  column "Orders Placed" do |u|
+    link_to(u.orders.count, admin_orders_path(user_id: u.id))
+  end
   column :last_sign_in_at
-  column :sign_in_count
   actions
 end
 
