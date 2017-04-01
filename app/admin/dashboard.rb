@@ -46,7 +46,7 @@ ActiveAdmin.register_page "Dashboard" do
           table_for User.order("id DESC").first(5) do
             column("Email")   {|user| link_to(user.email, admin_user_path(user)) }
             column("User Level"){|user| user.level }
-            column("Order placed")   {|user| user.orders.count }
+            column("Order placed")   {|user| link_to(user.orders.count, admin_orders_path(user_id: user.id)) }
           end          
         end
       end
