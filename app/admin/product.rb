@@ -18,11 +18,21 @@ ActiveAdmin.register Product do
   end
   
   index do
-    selectable_column
     id_column
     column :name
-    column :created_at
-    column :updated_at
+    column "User Levels" do |product|
+      columns do
+        column { "<strong><u>Level</u></strong>".html_safe }
+        column {"<strong><u>Quantity Ordered</u></strong>".html_safe }
+      end
+      product.quantity_levels.includes(:user_level).each do |ql|
+        columns do
+          column {|c| ql.user_level.level}
+          column {|c| ql.user_level.product_order_count(product) }
+        end
+      end
+      ""
+    end
   end
   
 #
