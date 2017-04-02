@@ -30,7 +30,10 @@ ActiveAdmin.register Product do
       product.quantity_levels.includes(:user_level).each do |ql|
         columns do
           column {|c| ql.user_level.level}
-          column {|c| ql.user_level.product_order_count(product) }
+          column {|c| 
+            prod_count = ql.user_level.product_order_count(product)
+            link_to(prod_count, admin_orders_path('q[by_product_in]': product.id, 'q[user_level_id_eq]': ql.user_level_id))
+          }
         end
       end
       ""
