@@ -19,7 +19,7 @@ index do
   column :level
   actions
   column "Orders" do |ul|
-    link_to("view", admin_user_level_orders_path(ul))
+    link_to("view", admin_orders_path('q[user_level_id_eq]': ul.id))
   end  
 end
 

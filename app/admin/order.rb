@@ -1,7 +1,5 @@
 ActiveAdmin.register Order do
   
-  belongs_to :user_level, optional: true
-  
   scope :success, :default => true
   scope :waiting_approval, default: true
   scope :rejected

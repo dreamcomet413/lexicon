@@ -13,7 +13,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "User level - Orders" do
           table_for UserLevel.all do
             column("Level")   {|l| l.level }
-            column("Orders Placed"){|l| link_to(l.orders.count, admin_user_level_orders_path(l)) }            
+            column("Orders Placed"){|l| link_to(l.orders.count, admin_orders_path('q[user_level_id_eq]': l.id)) }
           end
         end
       end
