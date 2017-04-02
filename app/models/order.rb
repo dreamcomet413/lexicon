@@ -12,15 +12,6 @@ class Order < ApplicationRecord
     parent.table[:id]
   end
   
-  def self.with_product(product_id)
-    joins(:order_items).where(order_items: {product_id: product_id} )
-  end
-  
-
-  def self.has_pc(pc_id)
-    self.joins(:products).where(products: {product_color_id: pc_id})
-  end
-  
   enum status: {success: 0, waiting_approval: 1, rejected: 2}
   
   validates :user, presence: true
@@ -86,6 +77,11 @@ class Order < ApplicationRecord
   
   def notify_through_email
     OrderMailer.order_confirmation(self).deliver_now
+  end
+  
+  # active admin filter
+  def self.with_product(product_id)
+    joins(:order_items).where(order_items: {product_id: product_id} ).where.not(order_items: {quantity: 0})
   end
     
 end

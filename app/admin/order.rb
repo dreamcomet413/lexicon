@@ -9,10 +9,10 @@ ActiveAdmin.register Order do
   filter :id
   filter :user
   filter :user_level
-  # filter :by_product,
-  #   :as => :select,
-  #   :label => 'contaiing product',
-  #   :collection => proc { Product.order(:name) }
+  filter :by_product_in,
+    :as => :select,
+    :label => 'contaiing product',
+    :collection => proc { Product.order(:name) }
   
   
   actions :all, :except => [:destroy, :new]
