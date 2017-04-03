@@ -14,7 +14,6 @@
         <div class="productDesc">
             <p>
               <span class="product-title"><%= f.object.product.name %></span>
-              <br/>
               <%= f.object.product.description -%>
               <% if f.object.errors.any? %>
                 <br/>
@@ -26,14 +25,12 @@
 
     <div class="c1">
       <div class="productMinQ">
-        <br/>
         <p><%= f.object.min_qty_level %></p>
       </div>
     </div>
 
     <div class="c1">
       <div class="productMinQ">
-        <br/>
         <p><%= f.object.max_qty_level %></p>
       </div>
     </div>
