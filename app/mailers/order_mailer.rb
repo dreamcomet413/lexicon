@@ -3,8 +3,8 @@ class OrderMailer < ApplicationMailer
   def order_confirmation(order)
     @order = order
     subject = "Order##{order.id} Status:#{order.status}"
-    recipients = "piyushshivam@gmail.com, #{order.user.email}"
-    
-    mail(to: recipients, subject: subject)
+    recipients = ::AdminUser.all.collect(&:email)
+    recipients << order.user.email
+    mail(to: recipients.join(', '), subject: subject)
   end
 end
