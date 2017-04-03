@@ -17,7 +17,7 @@
               <%= f.object.product.description -%>
               <% if f.object.errors.any? %>
                 <br/>
-                <small style="color:#8b0000;float:right;"><%= f.object.errors.full_messages.first -%></small>
+                <small class="min-qty-error"><%= f.object.errors.full_messages.first -%></small>
               <% end -%>
             </p>
         </div>

@@ -18,6 +18,8 @@ a.white-color-btn {
 
 .error-container {
   margin:0 auto;
+  margin-bottom: 15px !important;
+  padding: 15px;
   text-align: center;
 }
 
@@ -84,11 +86,36 @@ a.white-color-btn {
 }
 
 .productHeader p {
-  margin-bottom : 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .product-title {
   display: block;
   margin-bottom: 0px;
   line-height: 1.5em;
+}
+
+.error-container {
+  margin: 0 auto;
+  text-align: center;
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  margin-top: 5px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  width: 50%;
+}
+
+.min-qty-error{
+  float: right;
+  margin: 0 auto;
+  text-align: center;
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  margin-top: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  width: 50%;
 }

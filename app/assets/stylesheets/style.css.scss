@@ -698,14 +698,56 @@ body, p{
 .primaryColor{
 	color: #fff;
 }
-.primaryButton{
-	background: #7AC144;
-	color: #fff;
-	text-decoration: none;
-	padding: 10px 25px;
-	text-transform: capitalize;
-	font-family: 'Cabin';
+
+.primaryButton {
+  text-decoration: none !important;
+  padding: 10px 25px;
+  font-family: 'Cabin';
+  background: none;
+  cursor: pointer;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
 }
+
+.primaryButton:before {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #7AC144;
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.primaryButton:after {
+  width: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #1497c9;
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.primaryButton:hover:after {
+  width: 100%;
+}
+
 hr.fullWidth {
   border: 0;
   width: 100%;
@@ -886,15 +928,6 @@ input{
 /* CartButton */
 .addCart{
 	margin: 20px 0px 50px 0;
-}
-
-.primaryButton {
-    background: #7AC144;
-    color: #fff !important;
-    text-decoration: none !important;
-    padding: 10px 25px;
-    text-transform: capitalize;
-    font-family: 'Cabin';
 }
 
 h1, h2 {
