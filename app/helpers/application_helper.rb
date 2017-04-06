@@ -7,4 +7,8 @@ module ApplicationHelper
       "PENDING FOR APPROVAL"
     end
   end
+  
+  def support_email
+    "orders@lexiconresourcesonline.com"
+  end
 end

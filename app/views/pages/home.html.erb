@@ -28,6 +28,7 @@
                         <div class="navigation">
                             <ul>
                                 <li>
+                                  <%= mail_to support_email, "SUPPORT", class: 'primaryButton' %>&nbsp;
                                   <% if current_user -%>
                                     <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "primaryButton" -%>
                                   <% else -%>  
