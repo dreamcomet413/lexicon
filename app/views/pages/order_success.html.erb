@@ -48,8 +48,9 @@
                 <div class="row">
                     <div class="c12">
                         <h1><%= order_status @order -%></h1>
-                        <p>Thank you for your order. To return to the welcome page, please click <a href="/" class="white">here.</a>
-                        <% if @order.waiting_approval? -%>
+                        <p>
+                          
+                          Thank you for your order. To return to the welcome page, please click <a href="/" class="white">here.</a>
                           <p>
                             Order Details:<br/>
                             <% @order.order_items.each do |li| %>
@@ -58,7 +59,15 @@
                               <br/>
                             <% end -%>
                           </p>
-                        <% end -%>  
+
+                          <% if @order.success? %>
+                            <strong>Shipping Info:</strong>
+                            <br/>
+                            <%= current_user.full_name -%><br/>
+                            <%= current_user.full_address.html_safe -%><br/><br/>
+                            Your order is being shipped through Fed Ex One Rate. Please allow 2-4 business day
+                          <% end -%>
+                          
                         </p>
                     </div>
                 </div>

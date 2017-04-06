@@ -25,6 +25,12 @@ class User < ApplicationRecord
     end
   end
   
+  def full_address
+    "#{street_address},<br/>
+    #{city} - #{zip_code},<br/>
+    #{state},<br/>
+    Phone: #{telephone}"
+  end
   private
   
   def assign_default_level
