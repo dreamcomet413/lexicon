@@ -3,11 +3,11 @@ ActiveAdmin.register Product do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 
-  actions :all
+  actions :all, except: [:destroy, :show]
   
   filter :name
   
-  permit_params :name, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
+  permit_params :name, :published, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
   
   controller do
     def new 
@@ -22,6 +22,7 @@ ActiveAdmin.register Product do
   index do
     id_column
     column :name
+    column :published
     column "User Levels" do |product|
       columns do
         column { "<strong><u>Level</u></strong>".html_safe }
@@ -38,6 +39,7 @@ ActiveAdmin.register Product do
       end
       ""
     end
+    actions
   end
   
 #
@@ -51,6 +53,7 @@ ActiveAdmin.register Product do
   form do |f|
     f.inputs "Product Details" do
       f.input :name
+      f.input :published
       f.input :description
       f.input :image, :as => :file
       f.inputs do

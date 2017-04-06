@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   private
   
   def preload_order_items
-    Product.all.includes(:quantity_levels).each do |pr| 
+    Product.publishable.includes(:quantity_levels).each do |pr| 
       qty_level = pr.quantity_levels.find {|l| l.user_level_id == current_user.user_level_id}
       @order.order_items.build(product: pr, quantity: 0, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
     end
