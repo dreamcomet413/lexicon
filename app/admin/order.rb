@@ -29,17 +29,17 @@ ActiveAdmin.register Order do
       link_to("view products", admin_order_order_items_path(order))
     end
     column :created_at
-    actions
-    column "Controls" do |o|
-      accept_link = link_to("Accept", change_status_admin_order_path(o), data: {confirm: "Are you sure?"})
-      reject_link = link_to("Reject", edit_admin_order_path(o))
-      if o.waiting_approval?
-        accept_link + " || " + reject_link
-      elsif o.rejected?
-        accept_link
+    if params[:scope].present? && (params[:scope] != "success")
+      column "Controls" do |o|
+        accept_link = link_to("Accept", change_status_admin_order_path(o), data: {confirm: "Are you sure?"})
+        reject_link = link_to("Reject", edit_admin_order_path(o))
+        if o.waiting_approval?
+          accept_link + " || " + reject_link
+        elsif o.rejected?
+          accept_link
+        end
       end
     end
-    
   end
   
   member_action :change_status, method: :get do
