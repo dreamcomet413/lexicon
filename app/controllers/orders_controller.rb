@@ -12,14 +12,12 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build order_params
-    
-    if request.post?
-      sanitize_order
-    end
+    sanitize_order
     
     if @order.save
       redirect_to "/pages/order_success?order_id=#{@order.id}"
     else
+      preload_order_items
       render :new
     end
   end
@@ -29,7 +27,13 @@ class OrdersController < ApplicationController
   def preload_order_items
     Product.publishable.includes(:quantity_levels).each do |pr| 
       qty_level = pr.quantity_levels.find {|l| l.user_level_id == current_user.user_level_id}
-      @order.order_items.build(product: pr, quantity: 0, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
+      order_item = @order.order_items.find {|i| i.product_id == pr.id}
+      if order_item.present?
+        order_item.min_qty_level = qty_level.min_quantity
+        order_item.max_qty_level = qty_level.max_quantity
+      else
+        @order.order_items.build(product: pr, quantity: 0, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
+      end
     end
   end
   

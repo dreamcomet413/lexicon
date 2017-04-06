@@ -15,8 +15,9 @@ class Order < ApplicationRecord
   enum status: {success: 0, waiting_approval: 1, rejected: 2}
   
   validates :user, presence: true
-  accepts_nested_attributes_for :order_items #, :reject_if => lambda{ |a| a[:quantity] == "0" }
+  accepts_nested_attributes_for :order_items, :reject_if => lambda{ |a| ((a["quantity"] == "0") || (a["quantity"] == 0)) }
   
+  # admin uses this bit
   attr_accessor :reject_order
   
   # before_create :update_total
