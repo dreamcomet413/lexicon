@@ -43,10 +43,14 @@ ActiveAdmin.register Order do
   end
   
   member_action :change_status, method: :get do
-    resource.success!
-    msg = "Order##{resource.id}"
-    flash["notice"] = "#{msg} status has been updated !"
-    redirect_to(:back)
+    resource.status = "success"
+    if resource.save
+      msg = "Order##{resource.id}"
+      flash["notice"] = "#{msg} status has been updated !"
+    else
+      flash["error"] = "FAILED: " + resource.errors.full_messages.join(", ")
+    end
+    redirect_back(fallback_location: "/admin")
   end
   
   

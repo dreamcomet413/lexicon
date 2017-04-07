@@ -35,10 +35,10 @@ class Order < ApplicationRecord
   private
   
   def check_inventory_levels_on_update
-    if !new_record?
+    if !new_record? && !reject_order.present?
       order_items.includes(:product).each do |item|
         if item.quantity > item.product.quantity_available
-          errors.add(:base, "Resource: #{product.name} inventory is insufficient.")
+          errors.add(:base, "#{item.product.name} inventory is insufficient")
         end
       end
     end
