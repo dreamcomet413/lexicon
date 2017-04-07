@@ -28,7 +28,7 @@ index do
 end
 
 permit_params :email, :password, :password_confirmation, :user_level_id, :first_name, :last_name, :street_address, :city, :state,
-:zip_code, :telephone, :sales_force, :region, :region_id, :territory_alignment, :territory_id, :employee_id
+:zip_code, :telephone, :sales_force, :region, :region_id, :territory_name, :territory_id
 
 form do |f|
   f.inputs "User Details" do
@@ -48,9 +48,8 @@ form do |f|
     f.input :sales_force
     f.input :region, as: :select, collection: regions
     f.input :region_id, label: "Region ID"
-    f.input :territory_alignment
+    f.input :territory_name
     f.input :territory_id, label: "Territory ID"
-    f.input :employee_id, label: "Employee ID"
   end
   f.actions
 end
