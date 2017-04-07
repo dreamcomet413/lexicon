@@ -20,17 +20,42 @@ class Order < ApplicationRecord
   # admin uses this bit
   attr_accessor :reject_order
   
-  # before_create :update_total
+  validate :require_atleast_one_order_item
+  validate :check_inventory_levels_on_update
   
-  before_update :on_reject_change_status
+  # before_create :update_total  
   # before_save :validate_present_of_reason_on_rejection, only: :update
   
   before_create :set_status
-  after_save :notify_through_email
-  
-  validate :require_atleast_one_order_item
-  
+  before_update :on_reject_change_status
+  after_create  :notify_through_email
+  after_update  :adjust_inventory_levels_on_approval
+  after_update  :notify_through_email_on_status_change
+    
   private
+  
+  def check_inventory_levels_on_update
+    if !new_record?
+      order_items.includes(:product).each do |item|
+        if item.quantity > item.product.quantity_available
+          errors.add(:base, "Resource: #{product.name} inventory is insufficient.")
+        end
+      end
+    end
+  end
+  
+  def adjust_inventory_levels_on_approval
+    if changes["status"].present? && (changes["status"].last == "success")
+      order_items.each do |item|
+        product = item.product
+        product.with_lock do
+          product.quantity_available -= item.quantity
+          product.save!
+        end
+      end
+    end
+  end
+  
   def require_atleast_one_order_item
     errors.add(:base, "You must order atleast one product") if all_order_items_have_quantity_zero?
   end
@@ -67,8 +92,8 @@ class Order < ApplicationRecord
     end
   end
   
-  def notify_through_email_on_approval
-    if previous_changes["status"].present? && (previous_changes["status"] == "waiting_approval")
+  def notify_through_email_on_status_change
+    if changes["status"].present?
       notify_through_email
     end
   end
