@@ -22,7 +22,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Orders: Waiting Approval" do
           table_for Order.waiting_approval.includes(:order_items, :user).order("id DESC") do
             column("Order#ID")   {|order| link_to("Order##{order.id}", admin_order_path(order)) }
-            column("Products"){|order|  link_to("view products", admin_order_order_items_path(order))}
+            column("Resources"){|order|  link_to("view", admin_order_order_items_path(order))}
             column("User"){|order|  link_to(order.user.full_name, admin_user_path(order.user))}
             column "Controls" do |o|
               accept_link = link_to("Accept", change_status_admin_order_path(o), data: {confirm: "Are you sure?"})

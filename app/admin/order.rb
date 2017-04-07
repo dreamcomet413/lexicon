@@ -9,7 +9,7 @@ ActiveAdmin.register Order do
   filter :user_level
   filter :by_product_in,
     :as => :select,
-    :label => 'contaiing product',
+    :label => 'Resource',
     :collection => proc { Product.order(:name) }
   
   
@@ -25,8 +25,8 @@ ActiveAdmin.register Order do
     selectable_column
     id_column
     column :user
-    column "Products" do |order|
-      link_to("view products", admin_order_order_items_path(order))
+    column "Resources" do |order|
+      link_to("view", admin_order_order_items_path(order))
     end
     column :created_at
     if params[:scope].present? && (params[:scope] != "success")

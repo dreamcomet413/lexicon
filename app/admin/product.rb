@@ -1,4 +1,4 @@
-ActiveAdmin.register Product do
+ActiveAdmin.register Product, as: "Resource" do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -14,6 +14,22 @@ ActiveAdmin.register Product do
       super do |format|
         UserLevel.all.each do |ul|
           resource.quantity_levels.build(user_level_id: ul.id)
+        end
+      end
+    end
+
+    def create
+      super do |format|
+        if !resource.new_record?
+          flash["notice"] = "Resource was successfully created."
+        end
+      end
+    end
+    
+    def update
+      super do |format|
+        if resource.errors.blank?
+          flash["notice"] = "Resource was successfully updated."
         end
       end
     end
@@ -51,7 +67,7 @@ ActiveAdmin.register Product do
 #   permitted
 # end
   form do |f|
-    f.inputs "Product Details" do
+    f.inputs "Details" do
       f.input :name
       f.input :published
       f.input :description
@@ -67,7 +83,7 @@ ActiveAdmin.register Product do
         end
       end
     end
-    f.actions
+    f.submit f.object.new_record? ? "Create Resource" : "Update"
   end
   
 
