@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407101709) do
+ActiveRecord::Schema.define(version: 20170407175329) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170407101709) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.boolean  "published",                                   default: true
+    t.integer  "quantity_available",                          default: 0
   end
 
   create_table "quantity_levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

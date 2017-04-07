@@ -7,12 +7,14 @@ class OrderItem < ApplicationRecord
   # validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 1 }
   validate :product_present
   validate :check_min_quantity_critera, on: :create
+  validate :check_inventory
   
   delegate :name, to: :product
   
-  before_create :set_status
+  after_validation :set_status
 
   # before_save :finalize
+  after_commit :adjust_product_inventory, on: :create
   
   attr_accessor :min_qty_level
   attr_accessor :max_qty_level
@@ -27,6 +29,23 @@ class OrderItem < ApplicationRecord
 
 
   private
+  
+  def adjust_product_inventory
+    if order.success?
+      product.with_lock do
+        product.quantity_available -= quantity
+        product.save!
+      end
+    end
+  end
+  
+  def check_inventory
+    if errors[:quantity].blank?
+      if quantity > product.quantity_available
+        self.errors.add(:quantity, "is high.We do not have enough inventory, please decrease the quantity.")
+      end
+    end
+  end
   
   def set_status
     if quantity > max_qty_level

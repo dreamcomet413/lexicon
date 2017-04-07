@@ -5,8 +5,8 @@ class Product < ApplicationRecord
   
   accepts_nested_attributes_for :quantity_levels, :allow_destroy => false #, :reject_if => lambda{ |a| a[:detail.blank?] }
   
-  validates :name, :description, presence: true
-  # validates_numericality_of :price, greater_than_or_equal_to: 0
+  validates :name, :description, :quantity_available, presence: true
+  validates_numericality_of :quantity_available, greater_than_or_equal_to: 0
   
   scope :publishable, -> { where(published: true) }
   

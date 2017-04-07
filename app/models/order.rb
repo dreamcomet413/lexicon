@@ -25,8 +25,8 @@ class Order < ApplicationRecord
   before_update :on_reject_change_status
   # before_save :validate_present_of_reason_on_rejection, only: :update
   
-  after_create :set_status_and_notify
-  after_update :notify_through_email
+  before_create :set_status
+  after_save :notify_through_email
   
   validate :require_atleast_one_order_item
   
@@ -61,12 +61,9 @@ class Order < ApplicationRecord
     self.total = calculate_total
   end
   
-  def set_status_and_notify
+  def set_status
     if order_items.any?(&:high_quantity?)
-      self.waiting_approval!
-      notify_through_email
-    else
-      notify_through_email
+      self.status = "waiting_approval"
     end
   end
   

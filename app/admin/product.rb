@@ -7,7 +7,7 @@ ActiveAdmin.register Product, as: "Resource" do
   
   filter :name
   
-  permit_params :name, :published, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
+  permit_params :name, :published, :quantity_available, :description, :image, quantity_levels_attributes: [:product_id, :user_level_id, :min_quantity, :max_quantity, :id]
   
   controller do
     def new 
@@ -39,6 +39,7 @@ ActiveAdmin.register Product, as: "Resource" do
     id_column
     column :name
     column :published
+    column :quantity_available
     column "User Levels" do |product|
       columns do
         column { "<strong><u>Level</u></strong>".html_safe }
@@ -70,6 +71,7 @@ ActiveAdmin.register Product, as: "Resource" do
     f.inputs "Details" do
       f.input :name
       f.input :published
+      f.input :quantity_available
       f.input :description
       f.input :image, :as => :file
       f.inputs do
