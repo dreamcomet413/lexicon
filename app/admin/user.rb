@@ -11,9 +11,14 @@ ActiveAdmin.register User do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-actions :all, :except => [:destroy]
+actions :all, :except => [:destroy, :show]
 
 filter :email
+filter :first_name
+filter :last_name
+filter :region_id, label: "Region ID"
+filter :region, as: :select, collection: proc { regions }
+filter :territory_id, label: "Territory ID"
 
 index do
   selectable_column
