@@ -12,6 +12,8 @@ ActiveAdmin.register UserLevel do
 #   permitted
 # end
 
+config.filters = false
+
 actions :all, :except => [:destroy]
 
 index do
