@@ -17,17 +17,13 @@ class Order < ApplicationRecord
   validates :user, presence: true
   accepts_nested_attributes_for :order_items, :reject_if => lambda{ |a| ((a["quantity"] == "0") || (a["quantity"] == 0)) }
   
-  # admin uses this bit
-  attr_accessor :reject_order
-  
   validate :require_atleast_one_order_item
   validate :check_inventory_levels_on_update
   
   # before_create :update_total  
-  # before_save :validate_present_of_reason_on_rejection, only: :update
+  validate :validate_presence_of_reason_on_rejection
   
   before_create :set_status
-  before_update :on_reject_change_status
   after_create  :notify_through_email
   after_update  :adjust_inventory_levels_on_approval
   after_update  :notify_through_email_on_status_change
@@ -35,7 +31,7 @@ class Order < ApplicationRecord
   private
   
   def check_inventory_levels_on_update
-    if !new_record? && !reject_order.present?
+    if !new_record? && changed_attributes["status"].present? && success?
       order_items.includes(:product).each do |item|
         if item.quantity > item.product.quantity_available
           errors.add(:base, "#{item.product.name} inventory is insufficient")
@@ -45,7 +41,7 @@ class Order < ApplicationRecord
   end
   
   def adjust_inventory_levels_on_approval
-    if changes["status"].present? && (changes["status"].last == "success")
+    if changes["status"].present? && success?
       order_items.each do |item|
         product = item.product
         product.with_lock do
@@ -64,20 +60,14 @@ class Order < ApplicationRecord
     !order_items.collect(&:quantity).any? {|i| i > 0}
   end
       
-  def validate_present_of_reason_on_rejection
-    if reject_order.present?
+  def validate_presence_of_reason_on_rejection
+    if !new_record? && changed_attributes["status"].present? && rejected?
       if reason_for_rejection.blank?
         errors.add(:reason_for_rejection, "must be present.")
       end
     end
   end
-  
-  def on_reject_change_status
-    if reason_for_rejection.present? && reject_order.present?
-      self.status = "rejected"
-    end
-  end
-  
+    
   def calculate_total
     order_items.sum { |oi| oi.quantity * oi.unit_price  }
   end
