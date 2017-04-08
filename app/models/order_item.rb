@@ -36,16 +36,16 @@ class OrderItem < ApplicationRecord
     if errors[:quantity].blank? && quantity_level.present? && !quantity_level.duration_per_user.zero?
       duration = (quantity_level.duration_per_user - 1)
       quantity_per_user = quantity_level.quantity_per_user
-      orders = user.orders.success.where("created_at > ?", duration.days.ago.beginning_of_day).includes(:order_items).to_a
-      if orders.size > 0
-        qty_purchased = 0 
-        orders.each do |o|
-          qty_purchased += o.order_items.sum { |item| (item.product_id == product_id) ? item.quantity : 0 }
-        end
-        if (qty_purchased + quantity) > quantity_per_user
-          self.errors.add(:quantity, "exceeds the max units allowed in a period. Please decrease the quantity.")
-        end
+      orders = user.orders.success.where("created_at >= ?", duration.days.ago.beginning_of_day).includes(:order_items).to_a
+
+      qty_purchased = 0 
+      orders.each do |o|
+        qty_purchased += o.order_items.sum { |item| (item.product_id == product_id) ? item.quantity : 0 }
       end
+      if (qty_purchased + quantity) > quantity_per_user
+        self.errors.add(:quantity, "exceeds the max units allowed in a period. Please decrease the quantity.")
+      end
+
     end
   end
   

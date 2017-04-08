@@ -18,6 +18,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items, :reject_if => lambda{ |a| ((a["quantity"] == "0") || (a["quantity"] == 0)) }
   
   validate :require_atleast_one_order_item
+  validate :check_permissible_quantity_limits_on_update
   validate :check_inventory_levels_on_update
   
   # before_create :update_total  
@@ -29,6 +30,31 @@ class Order < ApplicationRecord
   after_update  :notify_through_email_on_status_change
     
   private
+  
+  def check_permissible_quantity_limits_on_update
+    if !new_record? && changed_attributes["status"].present? && success?
+      order_items.includes(product: [:quantity_levels]).each do |item|
+        quantity_level = item.product.quantity_levels.where(user_level_id: user.user_level_id).first
+        
+        if !quantity_level.duration_per_user.zero?
+          duration = (quantity_level.duration_per_user - 1)
+          quantity_per_user = quantity_level.quantity_per_user
+          orders = user.orders.success.where("created_at >= ?", duration.days.ago.beginning_of_day).includes(:order_items).to_a
+
+          qty_purchased = 0 
+          orders.each do |o|
+            qty_purchased += o.order_items.sum { |oi| (oi.product_id == item.product_id) ? oi.quantity : 0 }
+          end
+
+          if (qty_purchased + item.quantity) > quantity_per_user
+            self.errors.add(:base, "#{item.product.name} exceeds the max units allowed in a period.")
+          end
+
+        end
+        
+      end
+    end
+  end
   
   def check_inventory_levels_on_update
     if !new_record? && changed_attributes["status"].present? && success?
