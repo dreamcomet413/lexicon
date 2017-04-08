@@ -44,16 +44,16 @@ ActiveAdmin.register Product, as: "Resource" do
     column "User Levels" do |product|
       columns do
         column { "<strong><u>Level</u></strong>".html_safe }
-        column { "<strong><u>Max Qty</u></strong>".html_safe }
         column { "<strong><u>Min Qty</u></strong>".html_safe }
+        column { "<strong><u>Max Qty</u></strong>".html_safe }
         column { "<strong><u>Units / days</u></strong>".html_safe }
         column {"<strong><u>Quantity Ordered</u></strong>".html_safe }
       end
       product.quantity_levels.includes(:user_level).each do |ql|
         columns do
           column {|c| ql.user_level.level}
-          column {|c| ql.max_quantity}
           column {|c| ql.min_quantity}
+          column {|c| ql.max_quantity}
           column {|c| "#{ql.quantity_per_user} / #{ql.duration_per_user}"}
           column {|c| 
             prod_count = ql.user_level.product_order_count(product)
