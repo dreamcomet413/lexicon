@@ -7,7 +7,8 @@ class OrderItem < ApplicationRecord
   # validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 1 }
   validate :product_present
   validate :check_min_quantity_critera, on: :create
-  validate :check_inventory
+  validate :check_permissible_quantity_limits, on: :create
+  validate :check_inventory, on: :create
   
   delegate :name, to: :product
   
@@ -18,6 +19,7 @@ class OrderItem < ApplicationRecord
   
   attr_accessor :min_qty_level
   attr_accessor :max_qty_level
+  attr_accessor :quantity_level, :user
 
   def unit_price
     product.price
@@ -29,6 +31,23 @@ class OrderItem < ApplicationRecord
 
 
   private
+  
+  def check_permissible_quantity_limits
+    if errors[:quantity].blank? && quantity_level.present? && !quantity_level.duration_per_user.zero?
+      duration = (quantity_level.duration_per_user - 1)
+      quantity_per_user = quantity_level.quantity_per_user
+      orders = user.orders.success.where("created_at > ?", duration.days.ago.beginning_of_day).includes(:order_items).to_a
+      if orders.size > 0
+        qty_purchased = 0 
+        orders.each do |o|
+          qty_purchased += o.order_items.sum { |item| (item.product_id == product_id) ? item.quantity : 0 }
+        end
+        if (qty_purchased + quantity) > quantity_per_user
+          self.errors.add(:quantity, "exceeds the max units allowed in a period. Please decrease the quantity.")
+        end
+      end
+    end
+  end
   
   def adjust_product_inventory
     if order.success?

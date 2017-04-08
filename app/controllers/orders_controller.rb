@@ -46,6 +46,8 @@ class OrdersController < ApplicationController
       qty_level = Product.where(id:item.product_id).first.quantity_levels.where(user_level_id: current_user.user_level_id).first
       item.min_qty_level = qty_level.min_quantity
       item.max_qty_level = qty_level.max_quantity
+      item.quantity_level = qty_level
+      item.user = current_user
       # if item.quantity.blank?
       #   item.quantity = qty_level.min_quantity
       # end

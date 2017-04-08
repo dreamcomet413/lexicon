@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407175329) do
+ActiveRecord::Schema.define(version: 20170408081334) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "namespace"
@@ -85,10 +85,12 @@ ActiveRecord::Schema.define(version: 20170407175329) do
   create_table "quantity_levels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "product_id"
     t.integer  "user_level_id"
-    t.integer  "min_quantity",  default: 0
-    t.integer  "max_quantity",  default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "min_quantity",      default: 0
+    t.integer  "max_quantity",      default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "quantity_per_user", default: 0
+    t.integer  "duration_per_user", default: 0
     t.index ["product_id"], name: "index_quantity_levels_on_product_id", using: :btree
     t.index ["user_level_id"], name: "index_quantity_levels_on_user_level_id", using: :btree
   end

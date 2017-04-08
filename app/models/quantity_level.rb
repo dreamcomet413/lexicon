@@ -1,8 +1,10 @@
 class QuantityLevel < ApplicationRecord
   
-  validates :min_quantity, :max_quantity, presence: true
+  validates :min_quantity, :max_quantity, :duration_per_user, :quantity_per_user, presence: true
   
-  validates_numericality_of :min_quantity, :max_quantity, only_integer: true, greater_than_or_equal_to: 0
+  validates_numericality_of :min_quantity, :max_quantity, 
+                            :duration_per_user, :quantity_per_user, 
+                            only_integer: true, greater_than_or_equal_to: 0
   
   validate :max_greater_than_min
   
