@@ -937,3 +937,10 @@ h1, h2 {
 .white {
   color: #fff !important;
 }
+
+.logo img {
+  vertical-align: middle;
+  display: table-cell;
+  padding-top: 50px;
+  padding-bottom: 56px;
+}
