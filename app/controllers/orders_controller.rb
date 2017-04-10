@@ -32,6 +32,8 @@ class OrdersController < ApplicationController
         order_item.min_qty_level = qty_level.min_quantity
         order_item.max_qty_level = qty_level.max_quantity
       else
+        # don't include products with user level max quantity set to 0
+        next if qty_level.max_quantity.zero?
         @order.order_items.build(product: pr, quantity: 0, min_qty_level: qty_level.min_quantity, max_qty_level: qty_level.max_quantity)
       end
     end
