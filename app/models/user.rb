@@ -27,9 +27,7 @@ class User < ApplicationRecord
   
   def full_address
     "#{street_address},<br/>
-    #{city} - #{zip_code},<br/>
-    #{state},<br/>
-    Phone: #{telephone}"
+    #{city}, #{state} - #{zip_code}"
   end
   private
   
