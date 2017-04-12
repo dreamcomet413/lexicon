@@ -1,10 +1,10 @@
 module ApplicationHelper
   
-  def order_status(o)
+  def post_order_title(o)
     if o.success?
-      "SUCCESS"
+      "Thank you for your order!"
     elsif o.waiting_approval?
-      "PENDING FOR APPROVAL"
+      "Pending for approval"
     end
   end
   
