@@ -961,3 +961,19 @@ h1, h2 {
 .green {
   color: #CCDC27 !important;
 }
+
+.red {
+  color: red;
+}
+
+.error-container-2 {
+  text-align: center;
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 0px 5px;
+  margin-top: 15px;
+}

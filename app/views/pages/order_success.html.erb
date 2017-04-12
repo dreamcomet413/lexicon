@@ -72,8 +72,12 @@
                           Make an error? Need to change something? Please contact support
                           
                           <% if @order.waiting_approval? %>
-                            <br/><br/>
-                            <strong>*</strong> Resources that appear red require approval. You will receive an email if approved or rejected.
+                            <br/>
+                            <div class="error-container-2">
+                              <span class="error-msg">
+                                <strong>*</strong> Resources that appear red require approval. You will receive an email if approved or rejected.
+                              </span>
+                            </div>
                           <% end -%>
                           
                         </p>
