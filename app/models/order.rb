@@ -79,7 +79,7 @@ class Order < ApplicationRecord
   end
   
   def require_atleast_one_order_item
-    errors.add(:base, "You must order atleast one product") if all_order_items_have_quantity_zero?
+    errors.add(:base, "You must order at least one product") if all_order_items_have_quantity_zero?
   end
   
   def all_order_items_have_quantity_zero?
