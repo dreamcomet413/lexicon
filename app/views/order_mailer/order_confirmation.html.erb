@@ -51,7 +51,6 @@
             #header h3{
                 line-height: 67px !important;
                 text-align: right;
-                co
             }
 
             .post img{
@@ -105,16 +104,22 @@
         </style>
     </head>
     <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
-        <center>
+        <center style="background: #1d1f24;">
             <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="" id="bodyTable">
                 <tr><td height="20px"></td></tr>
                 <tr><td height="20px"></td></tr>
                 <tr>
                     <td>
                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" id="mainPosts">
+	                        
+
                             <tr>
                                 <td align="center">
-                                    <div class="post">
+                                    <div style="border-radius: 3px;
+                background: #ffffff;
+                margin: 0 10px;
+                padding-bottom: 40px;
+                overflow: hidden !important;" class="post">
                                         <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">  
                                             <tr><td><img src="https://lexiconresourcesonline.com/assets/logo-2187262f19c78de90b2a3082e9a3f29a84afa12c03d64248aafe9fb2302fe66f.png" /></td></tr>
                                             <tr height="46"><td>&nbsp;</td></tr>
@@ -125,67 +130,28 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2>Dear <%= @user.full_name -%></h2>
+                                                                    <h3 style="margin: 0px!important;
+                font-family: 'Open Sans',arial,sans-serif!important;
+                font-size: 20px!important;
+                line-height: 38px!important;
+                font-weight: 200!important;
+                color: rgb(37,43,51)!important;
+                text-align: center;">Thank you for placing an order!</h3>
+                <br />
+                <h3 style="margin: 0px!important;
+                font-family: 'Open Sans',arial,sans-serif!important;
+                font-size: 20px!important;
+                line-height: 38px!important;
+                font-weight: 200!important;
+                color: rgb(37,43,51)!important;
+                text-align: center;">Order Summary</h3>
+                
                                                                 </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <tr height="25"><td>&nbsp;</td></tr>
-
-                                            <tr><td align="center">
-                                            <table border="0" cellpadding="0" cellspacing="0" width="78%">
-                                                <tbody><tr><td align="center" style="font-family:'Open Sans',arial,sans-serif!important;font-size:16px!important;line-height:30px!important;font-weight:400!important;color:rgb(126,136,144)!important"><% if @order.rejected? %>
-        <strong>Reason for rejection:</strong><br/>
-        <%= @order.reason_for_rejection -%><br/><br/>
-      <% end %>
-      To track your Order please quote the following Order ID:<%= @order.id -%> for future communication.</td></tr>
-      
-      <tr><td align="center" style="font-family:'Open Sans',arial,sans-serif!important;font-size:16px!important;line-height:30px!important;font-weight:400!important;color:rgb(126,136,144)!important">
-        <strong>Shipping Info:</strong><br/>
-     <%= @user.full_address.html_safe -%><br/><br/>
-     <em style="font-size:13px;color:#333;">*Your order is being shipped through Fed Ex One Rate.<br/> Please allow 2-4 business days.</em>
-     </td></tr>
-                                            </tbody></table>
-                                            </td></tr>
-
-                                            <tr height="36"><td>&nbsp;</td></tr>
-
-                                            <tr><td align="center" valign="top">
-                                            <table border="0" cellspacing="0" cellpadding="0">
-                                                <tbody><tr><td align="center" valign="top">
-                                                    
-                                                    <a href="https://lexiconresourcesonline.com" style="padding:14px 28px;border-radius:3px;letter-spacing:0.125em;text-transform:uppercase;font-size:13px;font-family:'Open Sans',Arial,sans-serif;font-weight:400;color:rgb(255,255,255);text-decoration:none;display:inline-block;line-height:18px!important;background-color:#7AC144;" target="_blank" data-saferedirecturl="https://lexiconresourcesonline.com">Track Order</a>
-                                                </td></tr>
-                                            </tbody></table>
-                                        </td></tr>
-                                        </table>    
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr><td height="40px"></td></tr>
-
-                            <tr>
-                                <td align="center">
-                                    <div class="post">
-                                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">  
-                                            <tr><td><img src="https://lexiconresourcesonline.com/assets/logo-2187262f19c78de90b2a3082e9a3f29a84afa12c03d64248aafe9fb2302fe66f.png" /></td></tr>
-                                            <tr height="46"><td>&nbsp;</td></tr>
-                                            <tr>
-                                                <td align="center">
-                                                    <table border="0" cellpadding="0" cellspacing="0" width="85%">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    <h2>Order Summary:</h2>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <tr height="25"><td>&nbsp;</td></tr>
 
                                             <tr><td align="center">
                                             <table border="0" cellpadding="0" cellspacing="0" width="78%">
@@ -210,7 +176,71 @@
                                         </table>    
                                     </div>
                                 </td>
-                            </tr>                     
+                            </tr>       
+
+                            <tr><td height="40px"></td></tr>
+                            
+                            
+                            
+                            <tr>
+                                <td align="center">
+                                    <div style="border-radius: 3px;
+                background: #ffffff;
+                margin: 0 10px;
+                padding-bottom: 40px;
+                overflow: hidden !important;" class=" post">
+                                        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">  
+                                            <tr height="46"><td>&nbsp;</td></tr>
+                                            <tr>
+                                                <td align="center">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="85%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-align: center;">
+                                                                    <h2>Shipping Info</h2>
+                                                                    <em style="font-size:13px;color:#333;">*Your order is being shipped through Fed Ex One Rate.<br/> Please allow 2-4 business days.</em>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr height="25"><td>&nbsp;</td></tr>
+
+                                            <tr><td align="center">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="78%">
+                                                <tbody>
+	                                                
+	                                                
+      <tr><td align="center" style="font-family:'Open Sans',arial,sans-serif!important;font-size:16px!important;line-height:30px!important;font-weight:400!important;color:rgb(126,136,144)!important">
+        <strong>Shipping Info:</strong><br/>
+     <%= @user.full_address.html_safe -%><br/><br/>
+     
+     </td></tr>
+	                                                
+	                                                <tr><td align="center" style="font-family:'Open Sans',arial,sans-serif!important;font-size:16px!important;line-height:30px!important;font-weight:400!important;color:rgb(126,136,144)!important"><% if @order.rejected? %>
+        <strong>Reason for rejection:</strong><br/>
+        <%= @order.reason_for_rejection -%><br/><br/>
+      <% end %>
+      To track your Order please quote the following Order ID:<%= @order.id -%> for future communication.</td></tr>
+      
+                                            </tbody></table>
+                                            </td></tr>
+
+                                            <tr height="36"><td>&nbsp;</td></tr>
+
+                                            <tr><td align="center" valign="top">
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <tbody><tr><td align="center" valign="top">
+                                                    
+                                                    <a href="https://lexiconresourcesonline.com" style="padding:14px 28px;border-radius:3px;letter-spacing:0.125em;text-transform:uppercase;font-size:13px;font-family:'Open Sans',Arial,sans-serif;font-weight:400;color:rgb(255,255,255);text-decoration:none;display:inline-block;line-height:18px!important;background-color:#7AC144;" target="_blank" data-saferedirecturl="https://lexiconresourcesonline.com">Track Order</a>
+                                                </td></tr>
+                                            </tbody></table>
+                                        </td></tr>
+                                        </table>    
+                                    </div>
+                                </td>
+                            </tr>              
                         </table>
                     </td>
                 </tr>
