@@ -21,6 +21,19 @@ $(document).ready(function(){
 
   });
   
+  $('.tool-tip-para').on("mouseover", function(e) {
+    var el = $(this);
+    window.clearTimeout($(this).data("timeout"));
+    el.data("timeout", setTimeout(function () {
+      var val = parseInt(el.data("max"));
+      el.tooltipster('open', function(instance, helper){
+        var msg = "Maximum Quantity is " + val + ". Ordering more than " + val + " requires approval after order is placed."
+        instance.content(msg);
+      }); 
+    }, 0));
+
+  });
+  
   // $("#new_order").submit(function() {
   //   return !$(".quantity-input").hasClass('error');
   // })
@@ -41,5 +54,14 @@ $(document).ready(function(){
      contentCloning: true
   });
   
+  $('.quantity-input, .tool-tip-para').tooltipster({
+     animation: 'fade',
+     delay: 200,
+     timer: 3000,
+     theme: 'tooltipster-noir',
+     trigger: 'custom',
+     maxWidth: '300',
+     contentCloning: true
+  });
   
 });

@@ -31,7 +31,9 @@
 
     <div class="c1">
       <div class="productMinQ">
-        <p><%= f.object.max_qty_level %><span class='green'>*</span></p>
+        <%= content_tag :p, class: "tool-tip-para", data: {min: f.object.min_qty_level, max: f.object.max_qty_level, "tooltip-content": "#tooltip_content_info_para"} do %>
+          <%= f.object.max_qty_level %><span class='green'>*</span></p>
+        <% end -%>  
       </div>
     </div>
     
