@@ -8,7 +8,8 @@ class OrderItem < ApplicationRecord
   validate :product_present
   validate :check_min_quantity_critera, on: :create
   validate :check_permissible_quantity_limits, on: :create
-  validate :check_inventory, on: :create
+  # SKIP checking inventory while user placing order
+  # validate :check_inventory, on: :create
   
   delegate :name, to: :product
   
