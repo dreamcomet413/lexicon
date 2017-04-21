@@ -4,6 +4,7 @@ $(document).ready(function(){
     var el = $(this);
     var val = parseInt(el.val());
     var min = parseInt(el.data("min"));
+    var max = parseInt(el.data("max"));
     if(val == 0) {
       return true;
     }
@@ -17,20 +18,15 @@ $(document).ready(function(){
         }); 
         // el.val(0);
       }
+      else if (val > max) {
+        el.tooltipster('open', function(instance, helper){
+          var msg = "Maximum Quantity is "+max+". Ordering more than "+max+" requires approval after order is placed.";
+          instance.content(msg);
+        }); 
+        // el.val(0);
+      }
+      
     }, 300));
-
-  });
-  
-  $('.tool-tip-para').on("mouseover", function(e) {
-    var el = $(this);
-    window.clearTimeout($(this).data("timeout"));
-    el.data("timeout", setTimeout(function () {
-      var val = parseInt(el.data("max"));
-      el.tooltipster('open', function(instance, helper){
-        var msg = "Maximum Quantity is " + val + ". Ordering more than " + val + " requires approval after order is placed."
-        instance.content(msg);
-      }); 
-    }, 0));
 
   });
   
@@ -54,7 +50,7 @@ $(document).ready(function(){
      contentCloning: true
   });
   
-  $('.quantity-input, .tool-tip-para').tooltipster({
+  $('.quantity-input').tooltipster({
      animation: 'fade',
      delay: 200,
      timer: 3000,
