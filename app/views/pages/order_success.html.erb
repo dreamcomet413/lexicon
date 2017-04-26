@@ -60,14 +60,12 @@
                             <% end -%>
                           </p>
 
-                          <% if @order.success? %>
-                            <strong>Shipping Info:</strong>
-                            <br/>
-                            <%= current_user.full_name -%><br/>
-                            <%= current_user.full_address.html_safe -%><br/><br/>
-                            Your order is being shipped through Fed Ex One Rate. Please allow 2-4 business days.
-                            <br/>
-                          <% end -%>
+                          <strong>Shipping Info:</strong>
+                          <br/>
+                          <%= current_user.full_name -%><br/>
+                          <%= current_user.full_address.html_safe -%><br/><br/>
+                          Your order is being shipped through Fed Ex One Rate. Please allow 2-4 business days.
+                          <br/>
                           
                           Make an error? Need to change something? Please contact support
                           
