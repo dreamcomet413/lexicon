@@ -9,6 +9,6 @@ module ApplicationHelper
   end
   
   def support_email
-    "orders@lexiconresourcesonline.com"
+    "support@lexiconresourcesonline.com"
   end
 end
