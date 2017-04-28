@@ -170,6 +170,9 @@
                                                 <tbody><tr><td align="center" valign="top">
                                                     
                                                     <a href="#" style="padding:14px 28px;border-radius:3px;letter-spacing:0.125em;text-transform:uppercase;font-size:13px;font-family:'Open Sans',Arial,sans-serif;font-weight:400;color:rgb(255,255,255);text-decoration:none;display:inline-block;line-height:18px!important;background-color:#7AC144" target="_blank" data-saferedirecturl="#">Total Resources Ordered: <%= @order.order_items.sum(&:quantity) -%></a>
+                                                    <br /><br />
+                                                    *Resources marked ON HOLD are currently back-ordered. They will be shipped when inventory is in stock.
+                                                    <br />
                                                     <% if @order.waiting_approval? %>
                                                       <br /><br />
                                                       <p style="font-size:13px;color:#a94442;">* RESOURCES THAT APPEAR RED REQUIRE APPROVAL. YOU WILL RECEIVE AN EMAIL IF APPROVED OR REJECTED.</span>
