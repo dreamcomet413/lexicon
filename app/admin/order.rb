@@ -15,6 +15,17 @@ ActiveAdmin.register Order do
   
   actions :all, :except => [:destroy, :new]
   
+  csv do
+    column("Order ID") { |o| o.id }
+    column('User Name') { |o| o.user.full_name }
+    column('User Level') { |o| o.user_level.level }
+    column('Email') { |o| o.user.email }
+    column('Shipping Info') { |o| o.user.full_address_csv }
+    column('Resources') { |o| o.order_items.collect {|i| "#{i.name} - Quantity: #{i.quantity}"}.join(", ") }
+    column('Total Resources') { |o| o.order_items.sum(&:quantity) }
+    column('Date Created') { |o| o.created_at }
+  end
+  
   controller do
     def update
       update! {admin_orders_path(scope: 'waiting_approval')}

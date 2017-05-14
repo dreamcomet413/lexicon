@@ -29,6 +29,11 @@ class User < ApplicationRecord
     "#{street_address},<br/>
     #{city}, #{state} - #{zip_code}"
   end
+  
+  def full_address_csv
+    "#{street_address}, #{city}, #{state} - #{zip_code}"
+  end
+  
   private
   
   def assign_default_level
