@@ -1,6 +1,6 @@
 set :stage, :production
 set :branch, 'master'
-server '45.33.90.151', user: 'deploy', roles: %w{web app}
+server '172.104.6.203', user: 'deploy', roles: %w{web app}
 set :pty,  false
 
 # server-based syntax

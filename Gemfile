@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'activeadmin', github: 'activeadmin'
 gem "paperclip", "~> 5.0.0"
-gem 'capistrano-rbenv', github: "capistrano/rbenv"
+gem 'capistrano-rvm', github: "capistrano/rvm"
 gem 'capistrano-passenger'
 gem 'capistrano-bundler' # for capistrano/bundler
 gem 'capistrano-rails' # for capistrano/rails/*

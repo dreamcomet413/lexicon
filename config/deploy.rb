@@ -4,7 +4,7 @@ lock "3.8.0"
 # config valid only for current version of Capistrano
 
 set :application, 'lexicon'
-set :repo_url, 'git@bitbucket.org:contacthrk/lexicon.git'
+set :repo_url, 'git@gitlab.com:piyushshivam/lexicon.git'
 
 set :stages, %w(staging production)
 set :default_stage, "staging"
